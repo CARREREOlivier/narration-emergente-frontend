@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FoldersService } from '../../services/folders.service';
 import { Folder } from '../../models/folder.model';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-folder-view',
   templateUrl: './folder-view.component.html',
   standalone: true,
+  imports: [
+    NgIf
+  ],
   styleUrls: ['./folder-view.component.css']
 })
 export class FolderViewComponent implements OnInit {
