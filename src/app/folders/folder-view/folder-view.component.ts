@@ -16,23 +16,26 @@ import {NgIf} from '@angular/common';
 export class FolderViewComponent implements OnInit {
   folder: Folder | null = null;
   errorMessage: string = '';
+  folderSlug: string = '';
+  folderType: string = '';
 
-  constructor(private route: ActivatedRoute, private foldersService: FoldersService) { }
+  constructor(private route: ActivatedRoute, private foldersService: FoldersService) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      this.loadFolder(id);
-    }
+    this.folderSlug = this.route.snapshot.paramMap.get('slug') || '';
+    this.folderType = this.route.snapshot.url[0].path;  // Récupérer le type (aar, lets-play, etc.)
+    this.loadFolder(this.folderType, this.folderSlug);
   }
 
-  loadFolder(id: number): void {
-    this.foldersService.getFolderById(id).subscribe({
+  loadFolder(type: string, slug: string): void {
+    this.foldersService.getFolderBySlugAndType(type, slug).subscribe({
       next: (folder) => {
         this.folder = folder;
+        console.log('Folder data:', folder);
       },
-      error: () => {
+      error: (err) => {
         this.errorMessage = 'Erreur lors du chargement du dossier.';
+        console.error('Error fetching folder:', err);
       }
     });
   }
