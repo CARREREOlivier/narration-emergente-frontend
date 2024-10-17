@@ -1,3 +1,8 @@
+<div *ngIf="!cookiesAccepted" class="cookie-banner">
+  <p>Ce site utilise des cookies pour améliorer votre expérience. En continuant à utiliser ce site, vous acceptez leur utilisation.</p>
+  <button (click)="acceptCookies()">J'accepte</button>
+</div>
+
 <app-header></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

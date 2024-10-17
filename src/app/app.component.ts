@@ -14,4 +14,10 @@ import {HeaderComponent} from './shared/header/header.component';
 })
 export class AppComponent {
   title = 'narration-emergente-frontend';
+  cookiesAccepted: boolean = false;
+
+  acceptCookies(): void {
+    this.cookiesAccepted = true;
+    document.cookie = 'cookiesAccepted=true; max-age=31536000; path=/';  // 1 an de durée
+  }
 }
