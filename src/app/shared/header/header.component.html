@@ -2,14 +2,7 @@
   <div class="logo">
     <img src="assets/logo.png" alt="Logo" (click)="goToHome()">
   </div>
-  <nav>
-    <ul>
-      <li><a routerLink="/home">Accueil</a></li>
-      <li><a routerLink="/aar">AAR</a></li>
-      <li><a routerLink="/lets-play">Let's Play</a></li>
-      <li><a routerLink="/fan-fiction">Fan Fiction</a></li>
-    </ul>
-  </nav>
+  <app-navigation></app-navigation>  <!-- Intégration du composant Navigation -->
   <div class="auth-buttons">
     <button (click)="onLogin()">Connexion</button>
     <button (click)="onLogout()" *ngIf="isAuthenticated()">Déconnexion</button>
