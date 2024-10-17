@@ -1,11 +1,3 @@
-<div *ngIf="folder; else noFolder">
-  <h2>{{ folder.title }}</h2>
-  <p><strong>Description :</strong> {{ folder.description }}</p>
-  <p><strong>Contenu :</strong> {{ folder.text }}</p>
-  <p><strong>Créé le :</strong> {{ folder.created_at }}</p>
-  <p><strong>Dernière modification :</strong> {{ folder.last_modified }}</p>
-</div>
-
-<ng-template #noFolder>
-  <p>Dossier introuvable ou supprimé.</p>
-</ng-template>
+<h1>Détails du dossier</h1>
+<p *ngIf="folder">Titre du dossier : {{ folder.title }}</p>
+<p *ngIf="errorMessage">{{ errorMessage }}</p>
