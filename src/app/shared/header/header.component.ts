@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import {NavigationComponent} from '../navigation/navigation.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
+  imports: [
+    NavigationComponent
+  ],
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
