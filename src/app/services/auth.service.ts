@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import {User} from '../models/user.model';
+import {AuthResponse} from '../interfaces/auth-response';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,10 @@ export class AuthService {
   // Méthode pour gérer la connexion
   login(username: string, password: string, rememberMe: boolean): Observable<any> {
     const body = { username, password, rememberMe };
-    return this.http.post(`${this.apiUrl}/login`, body, { withCredentials: true }).pipe(
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, body, { withCredentials: true }).pipe(
       tap(response => {
-        if (response.status === 'success') {
-          localStorage.setItem('user', JSON.stringify({ username }));  // Stocker l'utilisateur
+        if (response.status === 'success') {  // TypeScript sait maintenant que 'status' existe
+          localStorage.setItem('user', JSON.stringify({ username }));
         }
       })
     );
@@ -34,5 +36,9 @@ export class AuthService {
         localStorage.removeItem('user');  // Supprimer l'utilisateur après déconnexion
       })
     );
+  }
+
+  register(user: User) {
+
   }
 }
