@@ -1,47 +1,41 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import {FormsModule} from '@angular/forms';
+import {NgIf} from '@angular/common';
 
-@Injectable({
-  providedIn: 'root'
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  standalone: true,
+  imports: [
+    FormsModule,
+    NgIf
+  ],
+  styleUrls: ['./login.component.css']
 })
-export class AuthService {
-  private apiUrl = 'http://localhost/index.php/auth';  // URL de l'API backend pour la connexion
+export class LoginComponent {
+  username: string = '';
+  password: string = '';
+  rememberMe: boolean = false;
+  errorMessage: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  // Méthode pour se connecter
-  login(username: string, password: string, rememberMe: boolean): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { username, password, rememberMe }).pipe(
-      map(response => {
-        this.setSession(response.token, rememberMe);
-        return response;
-      })
-    );
-  }
 
-  // Enregistrer la session utilisateur
-  private setSession(token: string, rememberMe: boolean): void {
-    const expiration = rememberMe ? 'indefinite' : '24h';
-    document.cookie = `token=${token}; max-age=${expiration}; path=/;`;
-  }
-
-  // Déconnexion de l'utilisateur
-  logout(): void {
-    document.cookie = 'token=; max-age=0; path=/;';  // Supprimer le cookie
-    console.log('Déconnexion réussie');
-  }
-
-  // Vérifier si l'utilisateur est connecté
-  isAuthenticated(): boolean {
-    const token = this.getCookie('token');
-    return !!token;
-  }
-
-  // Récupérer un cookie par son nom
-  private getCookie(name: string): string | null {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    return match ? match[2] : null;
+  onLogin(): void {
+    this.authService.login(this.username, this.password, this.rememberMe).subscribe({
+      next: (response) => {
+        if (response.status === 'success') {
+          this.router.navigate(['/home']); // Redirection après connexion
+        } else {
+          this.errorMessage = 'Nom d\'utilisateur ou mot de passe incorrect.';
+        }
+      },
+      error: (err) => {
+        console.error('Erreur lors de la connexion:', err);
+        this.errorMessage = 'Erreur lors de la connexion. Veuillez réessayer.';
+      }
+    });
   }
 }

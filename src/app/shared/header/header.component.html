@@ -4,7 +4,7 @@
   </div>
   <app-navigation></app-navigation>  <!-- Intégration du composant Navigation -->
   <div class="auth-buttons">
-    <button (click)="onLogin()">Connexion</button>
-    <button (click)="onLogout()" *ngIf="isAuthenticated()">Déconnexion</button>
+    <button *ngIf="!isAuthenticated()" (click)="onLogin()">Connexion</button>
+    <button *ngIf="isAuthenticated()" (click)="onLogout()">Déconnexion</button>
   </div>
 </header>
