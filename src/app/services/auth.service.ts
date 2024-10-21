@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,9 @@ export class AuthService {
         localStorage.removeItem('user');  // Supprimer l'utilisateur après déconnexion
       })
     );
+  }
+
+  register(user: User) {
+
   }
 }
