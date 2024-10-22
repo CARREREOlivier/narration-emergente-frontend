@@ -25,6 +25,9 @@ export class FoldersService {
     );
   }
 
+  getFoldersByType(type: string): Observable<Folder[]> {
+    return this.http.get<Folder[]>(`${this.apiUrl}/folders?type=${type}`);
+  }
 
   createFolder(folder: Folder): Observable<Folder> {
     return this.http.post<Folder>(`${this.apiUrl}/folders`, folder);
