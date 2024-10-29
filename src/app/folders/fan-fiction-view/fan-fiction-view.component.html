@@ -1,0 +1,20 @@
+<table>
+  <thead>
+  <tr>
+    <th>Titre</th>
+    <th>Auteur</th>
+    <th>Date de création</th>
+    <th>Nombre d'articles</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let fanFiction of fanFictions">
+    <td>{{ fanFiction.title }}</td>
+    <td>{{ fanFiction.username }}</td>
+    <td>{{ fanFiction.created_at | date: 'dd MMMM yyyy' }}</td>
+    <td>{{ fanFiction.article_count }}</td>
+    <td><a [routerLink]="['/lets-play', fanFiction.slug]">Voir</a></td>
+  </tr>
+  </tbody>
+</table>

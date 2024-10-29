@@ -1,0 +1,20 @@
+<table>
+  <thead>
+  <tr>
+    <th>Titre</th>
+    <th>Auteur</th>
+    <th>Date de création</th>
+    <th>Nombre d'articles</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let letsPlay of letsPlays">
+    <td>{{ letsPlay.title }}</td>
+    <td>{{ letsPlay.username }}</td>
+    <td>{{ letsPlay.created_at | date: 'dd MMMM yyyy' }}</td>
+    <td>{{ letsPlay.article_count }}</td>
+    <td><a [routerLink]="['/lets-play', letsPlay.slug]">Voir</a></td>
+  </tr>
+  </tbody>
+</table>
