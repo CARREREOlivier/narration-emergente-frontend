@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {catchError, Observable, of} from 'rxjs';
 import { Aar } from '../models/aar.model';
+import {AarWithArticles} from '../models/aarwitharticles';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class AarsService {
   }
   getAllAars(): Observable<Aar[]> {
     return this.http.get<Aar[]>(this.apiUrl);
+  }
+
+  getAarWithArticleBySlug(slug: string): Observable<AarWithArticles> {
+    return this.http.get<AarWithArticles>(`${this.apiUrl}/${slug}`, { withCredentials: true });
+
   }
 
   createAar(title: string, description: string, text: string): Observable<any> {
