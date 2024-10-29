@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FanFictionsService } from '../services/fan-fictions.service';
-import { FanFiction } from '../models/fan-fiction.model';
+import { FanFictionsService } from '../../services/fan-fictions.service';
+import { FanFiction } from '../../models/fan-fiction.model';
+import {DatePipe, NgForOf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-fan-fiction-view',
   templateUrl: './fan-fiction-view.component.html',
   standalone: true,
+  imports: [
+    DatePipe,
+    NgForOf,
+    RouterLink
+  ],
   styleUrls: ['./fan-fiction-view.component.css']
 })
 export class FanFictionViewComponent implements OnInit {
