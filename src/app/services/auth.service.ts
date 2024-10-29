@@ -38,7 +38,14 @@ export class AuthService {
     );
   }
 
+
   register(user: User) {
 
   }
+
+  getCurrentUser(): any {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
 }

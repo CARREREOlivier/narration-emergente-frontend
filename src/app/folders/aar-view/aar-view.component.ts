@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AarsService } from '../../services/aars.service';
 import { Aar } from '../../models/aar.model';
-import {NgForOf} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {DatePipe, NgForOf} from '@angular/common';
+import {Router, RouterLink} from '@angular/router';
+import {ButtonCreateComponent} from '../../shared/button-create/button-create.component';
 
 @Component({
   selector: 'app-aar-view',
@@ -10,14 +11,16 @@ import {RouterLink} from '@angular/router';
   standalone: true,
   imports: [
     NgForOf,
-    RouterLink
+    RouterLink,
+    DatePipe,
+    ButtonCreateComponent
   ],
   styleUrls: ['./aar-view.component.css']
 })
 export class AarViewComponent implements OnInit {
   aars: Aar[] = [];
 
-  constructor(private aarsService: AarsService) {}
+  constructor(private aarsService: AarsService, private router: Router) {}
 
   ngOnInit(): void {
     this.aarsService.getAllAars().subscribe({
@@ -28,5 +31,10 @@ export class AarViewComponent implements OnInit {
         console.error('Erreur lors du chargement des AARs:', err);
       }
     });
+  }
+
+  onCreateNewAar(): void {
+    // Redirige l'utilisateur vers la page de création de l'AAR
+    this.router.navigate(['/aar/create'])
   }
 }

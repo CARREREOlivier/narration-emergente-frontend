@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import {NavigationComponent} from '../navigation/navigation.component';
@@ -14,8 +14,25 @@ import {NgIf} from '@angular/common';
   ],
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
-  constructor(private authService: AuthService, private router: Router) { }
+export class HeaderComponent implements OnInit{
+  username: string | null = null;
+  userId: number | null = null;
+  constructor(private authService: AuthService, private router: Router) {
+
+  }
+
+  ngOnInit(): void {
+    this.checkAuthentication();
+  }
+
+  checkAuthentication(): void {
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      this.username = user.username;
+    } else {
+      this.username = 'Utilisateur non connecté';
+    }
+  }
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
@@ -28,13 +45,14 @@ export class HeaderComponent {
     this.router.navigate(['/login']);
   }
   onLogout(): void {
-    this.authService.logout().subscribe({
-      next: () => {
-        localStorage.removeItem('user');  // Suppression des infos utilisateur
-        this.router.navigate(['/home']); // redirection vers l'accueil
+    this.authService.logout().subscribe(
+      (response) => {
+        console.log('Déconnexion réussie');
+        this.username = 'Utilisateur non connecté';
       },
-      error: (err) => console.error('Erreur lors de la déconnexion:', err)
-    });
-
+      (error) => {
+        console.error('Erreur lors de la déconnexion:', error);
+      }
+    );
   }
 }
