@@ -7,6 +7,7 @@ import {AarViewComponent} from './folders/aar-view/aar-view.component';
 import {LetsPlayViewComponent} from './folders/lets-play-view/lets-play-view.component';
 import {FanFictionViewComponent} from './folders/fan-fiction-view/fan-fiction-view.component';
 import {AarCreateComponent} from './folders/aar-create/aar-create.component';
+import {AarDetailsComponent} from './folders/aar-details/aar-details.component';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,7 +21,7 @@ export const appRoutes: Routes = [
   { path: 'lets-play', component: LetsPlayViewComponent },
   { path: 'fan-fiction', component: FanFictionViewComponent },
 
- // { path: 'aar/:slug', component: FolderViewComponent },
+  { path: 'aar/:slug', component: AarDetailsComponent },
  // { path: 'lets-play/:slug', component: FolderViewComponent },
  // { path: 'fan-fiction/:slug', component: FolderViewComponent },
 
