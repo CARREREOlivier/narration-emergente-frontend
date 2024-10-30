@@ -15,5 +15,6 @@ export interface AarWithArticles {
     description: string;
     created_at: string;
     last_modified: string;
+    slug: string;
   }[];
 }

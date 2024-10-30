@@ -37,4 +37,25 @@ export class AarViewComponent implements OnInit {
     // Redirige l'utilisateur vers la page de création de l'AAR
     this.router.navigate(['/aar/create'])
   }
+
+
+  confirmDeleteAar(slug: string) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cet AAR ? Cette action est irréversible.")) {
+      this.deleteAar(slug);
+    }
+  }
+
+  deleteAar(slug: string) {
+    this.aarsService.deleteAar(slug).subscribe(
+      response => {
+        alert("AAR supprimé avec succès !");
+        // Filtrer la liste des AAR pour supprimer l'élément sans recharger
+        this.aars = this.aars.filter(aar => aar.slug !== slug);
+
+      },
+      error => {
+        console.error("Erreur lors de la suppression de l'AAR :", error);
+      }
+    );
+  }
 }

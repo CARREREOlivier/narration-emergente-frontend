@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import { AarsService } from '../../services/aars.service';
 import { AarWithArticles } from '../../models/aarwitharticles';
 import {CommonModule} from '@angular/common';
@@ -9,7 +9,7 @@ import {CommonModule} from '@angular/common';
   templateUrl: './aar-details.component.html',
   standalone: true,
   styleUrls: ['./aar-details.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule, RouterLink]
 })
 export class AarDetailsComponent implements OnInit {
   aarDetails: AarWithArticles | null = null;

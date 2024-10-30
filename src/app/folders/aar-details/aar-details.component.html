@@ -9,7 +9,7 @@
   <h2>Articles associés</h2>
   <ul>
     <li *ngFor="let article of aarDetails.articles">
-      <h3>{{ article.title }}</h3>
+      <h3><a [routerLink]="['/aar/article', article.slug]">{{ article.title }}</a></h3>
       <p>{{ article.description }}</p>
       <p><strong>Date:</strong> {{ article.created_at | date: 'dd MMMM yyyy' }}</p>
     </li>

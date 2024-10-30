@@ -1,0 +1,11 @@
+<div *ngIf="article">
+
+  <h1>{{ article.title }}</h1>
+  <p><strong>Description:</strong> {{ article.description }}</p>
+  <p><strong>Texte:</strong> {{ article.text }}</p>
+  <p><strong>Auteur:</strong> {{ article.id  }}</p>
+  <p><strong>Date de création:</strong> {{ article.created_at | date: 'dd MMMM yyyy' }}</p>
+  <p><strong>Dernière modification:</strong> {{ article.last_modified | date: 'dd MMMM yyyy' }}</p>
+
+</div>
+
