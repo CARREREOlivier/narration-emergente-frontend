@@ -41,4 +41,9 @@ export class AarsService {
       catchError(this.handleError.bind(this))
     );
   }
+
+  deleteAar(slug: string) {
+    return this.http.delete(`${this.apiUrl}/delete/${slug}`, { withCredentials: true });
+  }
+
 }

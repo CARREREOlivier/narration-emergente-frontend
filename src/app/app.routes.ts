@@ -17,11 +17,13 @@ export const appRoutes: Routes = [
 
   { path: 'aar', component: AarViewComponent },
   { path: 'aar/create', component: AarCreateComponent },
+  { path: 'aar/delete/ :slug', component: AarViewComponent },
 
   { path: 'lets-play', component: LetsPlayViewComponent },
   { path: 'fan-fiction', component: FanFictionViewComponent },
 
   { path: 'aar/:slug', component: AarDetailsComponent },
+
  // { path: 'lets-play/:slug', component: FolderViewComponent },
  // { path: 'fan-fiction/:slug', component: FolderViewComponent },
 
